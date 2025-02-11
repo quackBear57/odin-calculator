@@ -17,6 +17,7 @@ function loadCalculator() {
             row.appendChild(tile);
 
             //add buttons
+            if ()
             let button = document.createElement('btn');
             button.textContent = i + 1 + j * 3;
             tile.appendChild(button);
