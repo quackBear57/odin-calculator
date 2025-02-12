@@ -197,7 +197,22 @@ function calculate() {
         answer = divide(display1.textContent, display3.textContent);
     }
     // check length? negatives?
-    display5.textContent = answer;
+    if (answer.toString().length > 10) {
+        if (answer.toString().indexOf('.') >= 0) {
+            display5.textContent = roundAnswer(answer);
+        } else {
+            display5.textContent = "overflow";
+        }
+    } else {
+        display5.textContent = answer;
+    }
+}
+
+function roundAnswer(x) {
+    let decimalOverTen = (x.toString().length - 10);
+    let roundedAnswer = Number(Math.round(x + `e${decimalOverTen}`)+ 
+                            `e-${decimalOverTen}`);
+    return roundedAnswer;
 }
 
 function add(x, y) {
