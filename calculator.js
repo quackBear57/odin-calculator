@@ -7,15 +7,19 @@ function loadCalculator() {
     displays.style.display = 'flex';
     displays.setAttribute('id', 'displays');
     displays.style.padding = '40px 20px';
+    displays.style.gap = '10px';
     content.appendChild(displays);
     
     for (let i = 0; i < 4; i++) {
         const dsplyTile = document.createElement('div');
         dsplyTile.classList.add('dsplyTile');
         dsplyTile.style.width = '100px';
-        // dsplyTile.textContent = `dsply${i+1}`;
+        dsplyTile.style.height = '30px';
+        dsplyTile.style.alignContent = 'center';
         dsplyTile.setAttribute('id',`display${i+1}`);
         dsplyTile.style.textAlign = 'center';
+        dsplyTile.style.border = '2px solid black';
+        dsplyTile.style.borderRadius = '5px';
         displays.appendChild(dsplyTile);
     }
 
@@ -30,8 +34,6 @@ function loadCalculator() {
     for (let i = 0; i < 4; i++) {
         const operator = document.createElement('div');
         operator.classList.add('operator');
-        // operator.style.minHeight = '60px';
-        // operator.style.minWidth = '60px';
         operators.appendChild(operator);
         
         const btnOp = document.createElement('button');
@@ -103,7 +105,7 @@ function loadCalculator() {
     btnEnter.textContent = "=";
     btnEnter.style.width = '50px';
     btnEnter.style.height = 50*4 + 10*3 + 'px';
-    btnEnter.addEventListener('click',()=>calculate());
+    btnEnter.addEventListener('click',() => calculate());
     enterDiv.appendChild(btnEnter);
 
     const clearDiv = document.createElement('div');
@@ -151,12 +153,33 @@ function clearDisplay() {
 
 function calculate() {
     // call function based on operator
+    const displayOp = document.querySelector('#display2');
+    const display1 = document.querySelector('#display1');
+    const display3 = document.querySelector('#display3');
+    const display4 = document.querySelector('#display4');
 
+    if ((display1.textContent == '') ||
+        (displayOp.textContent == '') ||
+        (display3.textContent == '')) {
+        alert('Missing input');
+        return;
+    }
+
+    if (displayOp.textContent == '+') {
+        let answer = add(display1.textContent, display3.textContent);
+        display4.textContent = answer;
+    } else if (displayOp.textContent == '-') {
+        // sub
+    } else if (displayOp.textContent == '*') {
+        // multiply
+    } else if (displayOp.textContent == '/') {
+        //divide
+    }
     // update display4
 }
 
 function add(x, y) {
-    return x + y;
+    return parseFloat(x) + parseFloat(y);
 }
 
 function subtract(x, y) {
