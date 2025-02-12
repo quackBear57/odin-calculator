@@ -13,7 +13,8 @@ function loadCalculator() {
         const dsplyTile = document.createElement('div');
         dsplyTile.classList.add('dsplyTile');
         dsplyTile.style.width = '100px';
-        dsplyTile.textContent = `dsply${i}`;
+        // dsplyTile.textContent = `dsply${i+1}`;
+        dsplyTile.setAttribute('id',`display${i+1}`);
         dsplyTile.style.textAlign = 'center';
         displays.appendChild(dsplyTile);
     }
@@ -45,6 +46,7 @@ function loadCalculator() {
         } else {
             btnOp.textContent = "/";
         }
+        btnOp.addEventListener('click', () => updateOperator(btnOp.textContent));
         operator.appendChild(btnOp);
     }
 
@@ -53,7 +55,6 @@ function loadCalculator() {
     bottomButtons.setAttribute('id', 'bottomButtons');
     bottomButtons.style.justifyContent = 'center';
     bottomButtons.style.margin = '10px';
-    // bottomButtons.style.gap = '10px';
     content.appendChild(bottomButtons);
 
     const numbers = document.createElement('div');
@@ -80,7 +81,7 @@ function loadCalculator() {
             row.appendChild(tile);
 
             const btnNum = document.createElement('button');
-            if ((i == 3) && (j == 0)){
+            if ((i == 3) && (j == 0)) {
                 btnNum.textContent = '';
             } else if ((i == 3) && (j == 1)) {
                 btnNum.textContent = '0';
@@ -91,6 +92,9 @@ function loadCalculator() {
             }
             btnNum.style.width = '50px';
             btnNum.style.height = '50px';
+            btnNum.addEventListener('click', () => {
+                updateDisplay(btnNum.textContent);
+            });
             tile.appendChild(btnNum);
         }
     }
@@ -101,6 +105,47 @@ function loadCalculator() {
     btnEnter.style.height = 50*4 + 10*3 + 'px';
     enterDiv.appendChild(btnEnter);
 
+    const clearDiv = document.createElement('div');
+    content.appendChild(clearDiv);
+
+    const btnClear = document.createElement('button');
+    btnClear.textContent = 'Clear';
+    btnClear.style.width = 50*4 + 10*3 + 'px';
+    btnClear.style.height = '50px';
+    btnClear.addEventListener('click', () => clearDisplay());
+    clearDiv.appendChild(btnClear);
+}
+
+function updateDisplay(input) {
+    // check for input:
+    //  not more than one decimal
+    //  which display to update based on operator
+    if (document.querySelector('#display2').textContent == "") {
+        // check for decimal
+        
+        // update display1
+        document.querySelector('#display1').textContent += input;
+    } else {
+        // check for decimal
+        // update display3
+    }
+    // alert(input);
+}
+
+function updateOperator(input) {
+    document.querySelector('#display2').textContent = input;
+}
+
+function clearDisplay() {
+    for (let i = 0; i < 4; i++) {
+        document.querySelector(`#display${i+1}`).textContent = "";
+    }
+}
+
+function calculate() {
+    // call function based on operator
+
+    // update display4
 }
 
 function add(x, y) {
@@ -116,6 +161,7 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+    // check for divide by zero
     return x / y;
 }
 
