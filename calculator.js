@@ -131,6 +131,9 @@ function updateDisplay(input) {
     const displayOp = document.querySelector('#display2');
     const display1 = document.querySelector('#display1');
     const display3 = document.querySelector('#display3');
+    const display5 = document.querySelector('#display5');
+
+    if (display5.textContent !== "") {clearDisplay();}
 
     if (displayOp.textContent == "") {
         if ((input == '.') && display1.textContent.indexOf('.') >= 0) {
@@ -152,8 +155,10 @@ function updateOperator(input) {
 }
 
 function clearDisplay() {
-    for (let i = 0; i < 4; i++) {
-        document.querySelector(`#display${i+1}`).textContent = "";
+    for (let i = 0; i < 5; i++) {
+        if (i !== 3){
+            document.querySelector(`#display${i+1}`).textContent = "";
+        }
     }
 }
 
@@ -171,17 +176,18 @@ function calculate() {
         return;
     }
 
+    let answer = "";
     if (displayOp.textContent == '+') {
-        let answer = add(display1.textContent, display3.textContent);
-        display5.textContent = answer;
+        answer = add(display1.textContent, display3.textContent);
     } else if (displayOp.textContent == '-') {
-        // sub
+        answer = subtract(display1.textContent, display3.textContent);
     } else if (displayOp.textContent == '*') {
         // multiply
     } else if (displayOp.textContent == '/') {
         //divide
     }
-    // update display4
+    // check length? negatives?
+    display5.textContent = answer;
 }
 
 function add(x, y) {
@@ -189,7 +195,7 @@ function add(x, y) {
 }
 
 function subtract(x, y) {
-    return x - y;
+    return parseFloat(x) - parseFloat(y);
 }
 
 function multiply(x, y) {
