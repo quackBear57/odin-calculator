@@ -10,16 +10,22 @@ function loadCalculator() {
     displays.style.gap = '10px';
     content.appendChild(displays);
     
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
         const dsplyTile = document.createElement('div');
         dsplyTile.classList.add('dsplyTile');
-        dsplyTile.style.width = '100px';
-        dsplyTile.style.height = '30px';
-        dsplyTile.style.alignContent = 'center';
         dsplyTile.setAttribute('id',`display${i+1}`);
+        dsplyTile.style.alignContent = 'center';
         dsplyTile.style.textAlign = 'center';
-        dsplyTile.style.border = '2px solid black';
-        dsplyTile.style.borderRadius = '5px';
+        if (i == 3) {
+            dsplyTile.style.width = '50px';
+            dsplyTile.style.height = '30px';
+            dsplyTile.textContent = "=";
+        } else {
+            dsplyTile.style.width = '100px';
+            dsplyTile.style.height = '30px';
+            dsplyTile.style.border = '2px solid black';
+            dsplyTile.style.borderRadius = '5px';
+        }
         displays.appendChild(dsplyTile);
     }
 
@@ -156,7 +162,7 @@ function calculate() {
     const displayOp = document.querySelector('#display2');
     const display1 = document.querySelector('#display1');
     const display3 = document.querySelector('#display3');
-    const display4 = document.querySelector('#display4');
+    const display5 = document.querySelector('#display5');
 
     if ((display1.textContent == '') ||
         (displayOp.textContent == '') ||
@@ -167,7 +173,7 @@ function calculate() {
 
     if (displayOp.textContent == '+') {
         let answer = add(display1.textContent, display3.textContent);
-        display4.textContent = answer;
+        display5.textContent = answer;
     } else if (displayOp.textContent == '-') {
         // sub
     } else if (displayOp.textContent == '*') {
