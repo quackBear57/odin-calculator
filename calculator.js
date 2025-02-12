@@ -194,7 +194,7 @@ function calculate() {
     } else if (displayOp.textContent == '*') {
         answer = multiply(display1.textContent, display3.textContent);
     } else if (displayOp.textContent == '/') {
-        //divide
+        answer = divide(display1.textContent, display3.textContent);
     }
     // check length? negatives?
     display5.textContent = answer;
@@ -213,8 +213,11 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
-    // check for divide by zero
-    return x / y;
+    if (y == 0) {
+        alert('Cannot divide by zero');
+    } else {
+        return parseFloat(x) / parseFloat(y);
+    }
 }
 
 loadCalculator();
