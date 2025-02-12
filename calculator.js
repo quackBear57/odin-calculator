@@ -103,6 +103,7 @@ function loadCalculator() {
     btnEnter.textContent = "=";
     btnEnter.style.width = '50px';
     btnEnter.style.height = 50*4 + 10*3 + 'px';
+    btnEnter.addEventListener('click',()=>calculate());
     enterDiv.appendChild(btnEnter);
 
     const clearDiv = document.createElement('div');
@@ -117,19 +118,25 @@ function loadCalculator() {
 }
 
 function updateDisplay(input) {
-    // check for input:
-    //  not more than one decimal
-    //  which display to update based on operator
-    if (document.querySelector('#display2').textContent == "") {
-        // check for decimal
-        
-        // update display1
-        document.querySelector('#display1').textContent += input;
+    // limits: 10 characters or less, only one decimal
+
+    const displayOp = document.querySelector('#display2');
+    const display1 = document.querySelector('#display1');
+    const display3 = document.querySelector('#display3');
+
+    if (displayOp.textContent == "") {
+        if ((input == '.') && display1.textContent.indexOf('.') >= 0) {
+            // do nothing
+        } else if (display1.textContent.length < 10) {
+            display1.textContent += input;
+        }
     } else {
-        // check for decimal
-        // update display3
+        if ((input == '.') && display3.textContent.indexOf('.') >= 0) {
+            // do nothing
+        } else if (display3.textContent.length < 10) {
+            display3.textContent += input;
+        }
     }
-    // alert(input);
 }
 
 function updateOperator(input) {
