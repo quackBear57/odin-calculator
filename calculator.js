@@ -151,6 +151,16 @@ function updateDisplay(input) {
 }
 
 function updateOperator(input) {
+    const displayOp = document.querySelector('#display2');
+    const display1 = document.querySelector('#display1');
+    const display3 = document.querySelector('#display3');
+    const display5 = document.querySelector('#display5');
+
+    if (display5.textContent !== '') {
+        display1.textContent = display5.textContent;
+        display3.textContent = '';
+        display5.textContent = '';
+    }
     document.querySelector('#display2').textContent = input;
 }
 
@@ -182,7 +192,7 @@ function calculate() {
     } else if (displayOp.textContent == '-') {
         answer = subtract(display1.textContent, display3.textContent);
     } else if (displayOp.textContent == '*') {
-        // multiply
+        answer = multiply(display1.textContent, display3.textContent);
     } else if (displayOp.textContent == '/') {
         //divide
     }
@@ -199,7 +209,7 @@ function subtract(x, y) {
 }
 
 function multiply(x, y) {
-    return x * y;
+    return parseFloat(x) * parseFloat(y);
 }
 
 function divide(x, y) {
